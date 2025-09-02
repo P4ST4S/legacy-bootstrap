@@ -19,7 +19,7 @@ This repository contains a comprehensive modernization initiative that transform
 
 **Live CI/CD Pipeline:** Our GitHub Actions workflow automatically validates every commit with:
 
-- ✅ **29 Automated Tests** across Python 3.8-3.11
+- ✅ **29 Automated Tests** across Python 3.8-3.12
 - ✅ **Code Quality Checks** with flake8 and black
 - ✅ **Integration Testing** with end-to-end validation
 - ✅ **Coverage Analysis** with detailed HTML reports
@@ -128,7 +128,7 @@ cobc -x test-data-manager.cob -o test-data-manager
 - ✅ **18 COBOL Tests**: Validate original system behavior
 - ✅ **29 Python Tests**: Comprehensive automated test suite
 - ✅ **100% Pass Rate**: All tests successful in both systems
-- ✅ **Multi-Python Support**: Tested on Python 3.8, 3.9, 3.10, 3.11
+- ✅ **Multi-Python Support**: Tested on Python 3.8, 3.9, 3.10, , 3.12
 - ✅ **Continuous Integration**: Automated testing on every commit and PR
 - ✅ **Code Quality**: Automated linting and formatting checks
 - ✅ **Coverage Reports**: Detailed HTML coverage reports generated automatically
@@ -205,7 +205,7 @@ Our CI/CD pipeline automatically validates every code change through comprehensi
 
 #### **Multi-Job Pipeline**
 
-- **🧪 Core Testing**: Runs 29 automated tests across Python 3.8-3.11
+- **🧪 Core Testing**: Runs 29 automated tests across Python 3.8-3.12
 - **📊 Code Quality**: Linting with flake8 and formatting checks with black
 - **📚 Documentation**: Validates all required documentation is present
 - **📈 Coverage Analysis**: Generates detailed test coverage reports

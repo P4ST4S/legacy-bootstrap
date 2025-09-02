@@ -5,7 +5,7 @@
 ### Python Version
 - **Minimum**: Python 3.7
 - **Recommended**: Python 3.9 or higher
-- **Tested with**: Python 3.9, 3.10, 3.11
+- **Tested with**: Python 3.9, 3.10, 3.11, 3.12
 
 ### Dependencies
 This project uses only Python standard library modules, no external dependencies required:
