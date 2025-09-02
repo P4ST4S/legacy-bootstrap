@@ -12,7 +12,7 @@ This repository contains a comprehensive modernization initiative that transform
 
 ## 🚦 CI/CD Status & Quality Metrics
 
-[![Build Status](https://github.com/P4ST4S/legacy-bootstrap/actions/workflows/python-tests.yml/badge.svg?branch=main)](https://github.com/P4ST4S/legacy-bootstrap/actions/workflows/python-tests.yml)
+[![Build Status](https://github.com/P4ST4S/legacy-bootstrap/actions/workflows/python-tests.yml/badge.svg)](https://github.com/P4ST4S/legacy-bootstrap/actions/workflows/python-tests.yml)
 [![Tests Passing](https://img.shields.io/badge/tests-29%2F29%20passing-brightgreen)](https://github.com/P4ST4S/legacy-bootstrap/actions/workflows/python-tests.yml)
 [![Code Quality](https://img.shields.io/badge/code%20quality-excellent-brightgreen)](https://github.com/P4ST4S/legacy-bootstrap/actions/workflows/python-tests.yml)
 [![Integration](https://img.shields.io/badge/integration-validated-brightgreen)](https://github.com/P4ST4S/legacy-bootstrap/actions/workflows/python-tests.yml)
