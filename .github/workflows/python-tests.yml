@@ -31,7 +31,9 @@ jobs:
         working-directory: ./legacy-app-python
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          # This project uses only Python standard library modules
+          # No external dependencies required
+          echo "✅ Using Python standard library only - no external dependencies to install"
 
       - name: Run Python tests
         working-directory: ./legacy-app-python
