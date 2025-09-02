@@ -184,7 +184,7 @@ jobs:
           echo "✅ Test coverage analysis completed"
 
       - name: Upload coverage reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: legacy-app-python/htmlcov/
