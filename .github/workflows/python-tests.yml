@@ -76,7 +76,7 @@ jobs:
 
           # Create system
           factory = SystemFactory()
-          system = factory.create_account_management_system()
+          system = factory.create_complete_system()
 
           # Test basic operations
           initial_balance = system.get_balance()
