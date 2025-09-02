@@ -78,11 +78,11 @@ jobs:
           factory = SystemFactory()
           system = factory.create_complete_system()
 
-          # Test basic operations
-          initial_balance = system.get_balance()
-          system.credit_account(Decimal('100.00'))
-          system.debit_account(Decimal('50.00'))
-          final_balance = system.get_balance()
+          # Test basic operations through the system's operations interface
+          initial_balance = system.operations.view_balance()
+          system.operations.credit_account(Decimal('100.00'))
+          system.operations.debit_account(Decimal('50.00'))
+          final_balance = system.operations.view_balance()
 
           print(f'Initial balance: {initial_balance}')
           print(f'Final balance: {final_balance}')
