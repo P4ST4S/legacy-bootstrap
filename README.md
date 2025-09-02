@@ -11,7 +11,9 @@ legacy-bootstrap/
 ├── README.md                       # This file - Project overview
 ├── docs/                          # Project documentation
 │   ├── COBOL_TESTS_README.md      # COBOL test suite documentation
-│   └── CONVERSION_JUSTIFICATION.md # Complete conversion justification
+│   ├── CONVERSION_JUSTIFICATION.md # Complete conversion justification
+│   ├── MIGRATION_REPORT.md        # Detailed migration process
+│   └── PROJECT_SUMMARY.md         # Executive summary and outcomes
 ├── modernize-legacy-cobol-app/     # Original COBOL system
 │   ├── main.cob                   # Main program with menu system
 │   ├── operations.cob             # Account operations (credit/debit)
@@ -23,6 +25,7 @@ legacy-bootstrap/
 │       ├── test-data-manager.cob  # Data persistence tests
 │       └── README.md             # COBOL tests documentation
 └── legacy-app-python/            # Modernized Python implementation
+    ├── README.md                 # Python implementation guide
     ├── main.py                   # Main application entry point
     ├── operations.py             # Account operations module
     ├── data_manager.py           # Data persistence module
@@ -30,7 +33,8 @@ legacy-bootstrap/
     ├── factory.py                # Dependency injection factory
     ├── test_account_system.py    # Comprehensive test suite (29 tests)
     ├── demo.py                   # Interactive demonstration
-    └── docs/                     # Python implementation docs
+    ├── TESTING.md               # Testing documentation
+    └── COUPLING_IMPROVEMENTS.md # Architecture improvements
 ```
 
 ## 🚀 Quick Start
@@ -172,13 +176,14 @@ cobc -x test-data-manager.cob -o test-data-manager
 
 - **[CONVERSION_JUSTIFICATION.md](docs/CONVERSION_JUSTIFICATION.md)**: Complete business and technical justification for the conversion
 - **[COBOL_TESTS_README.md](docs/COBOL_TESTS_README.md)**: Comprehensive COBOL test suite documentation
+- **[MIGRATION_REPORT.md](docs/MIGRATION_REPORT.md)**: Detailed migration process and technical decisions
+- **[PROJECT_SUMMARY.md](docs/PROJECT_SUMMARY.md)**: Executive summary and project outcomes
 
 ### Implementation Documentation
 
 - **[Python README](legacy-app-python/README.md)**: Detailed Python implementation guide
-- **[Migration Report](legacy-app-python/docs/MIGRATION_REPORT.md)**: Technical migration process documentation
-- **[Testing Guide](legacy-app-python/docs/TESTING.md)**: Comprehensive testing documentation
-- **[Coupling Improvements](legacy-app-python/docs/COUPLING_IMPROVEMENTS.md)**: Architecture improvement details
+- **[Testing Guide](legacy-app-python/TESTING.md)**: Comprehensive testing documentation
+- **[Coupling Improvements](legacy-app-python/COUPLING_IMPROVEMENTS.md)**: Architecture improvement details
 
 ## 🎯 Project Outcomes
 
