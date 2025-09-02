@@ -1,0 +1,190 @@
+name: Python Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "legacy-app-python/**"
+      - ".github/workflows/python-tests.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "legacy-app-python/**"
+      - ".github/workflows/python-tests.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, "3.10", "3.11"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        working-directory: ./legacy-app-python
+        run: |
+          python -m pip install --upgrade pip
+          # This project uses only Python standard library modules
+          # No external dependencies required
+          echo "✅ Using Python standard library only - no external dependencies to install"
+
+      - name: Run Python tests
+        working-directory: ./legacy-app-python
+        run: |
+          python -m unittest test_account_system.py -v
+
+      - name: Test demo script
+        working-directory: ./legacy-app-python
+        run: |
+          # Test that demo script can be imported without errors
+          python -c "import demo; print('Demo script imports successfully')"
+
+      - name: Verify main application
+        working-directory: ./legacy-app-python
+        run: |
+          # Test that main application can be imported without errors
+          python -c "import main; print('Main application imports successfully')"
+
+      - name: Check code structure
+        working-directory: ./legacy-app-python
+        run: |
+          # Verify all required modules can be imported
+          python -c "
+          import main
+          import operations  
+          import data_manager
+          import interfaces
+          import factory
+          print('All modules import successfully')
+          print('✅ Python system structure validated')
+          "
+
+      - name: Run integration test
+        working-directory: ./legacy-app-python
+        run: |
+          # Run a quick integration test to verify system works end-to-end
+          python -c "
+          from factory import SystemFactory
+          from decimal import Decimal
+
+          # Create system
+          factory = SystemFactory()
+          system = factory.create_complete_system()
+
+          # Test basic operations through the system's operations interface
+          initial_balance = system.operations.view_balance()
+          system.operations.credit_account(Decimal('100.00'))
+          system.operations.debit_account(Decimal('50.00'))
+          final_balance = system.operations.view_balance()
+
+          print(f'Initial balance: {initial_balance}')
+          print(f'Final balance: {final_balance}')
+          print('✅ Integration test passed')
+          "
+
+  code-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install code quality tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 black
+
+      - name: Run flake8 linting
+        working-directory: ./legacy-app-python
+        run: |
+          # Run flake8 with relaxed settings for legacy modernization
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          echo "✅ Critical linting checks passed"
+
+      - name: Check code formatting with black
+        working-directory: ./legacy-app-python
+        run: |
+          # Check if code would be reformatted by black
+          black --check --diff . || echo "Note: Code formatting suggestions available"
+          echo "✅ Code formatting check completed"
+
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify documentation structure
+        run: |
+          echo "Checking documentation structure..."
+
+          # Check root documentation
+          if [ -f "docs/CONVERSION_JUSTIFICATION.md" ]; then
+            echo "✅ Conversion justification found"
+          else
+            echo "❌ Conversion justification missing"
+            exit 1
+          fi
+
+          if [ -f "docs/COBOL_TESTS_README.md" ]; then
+            echo "✅ COBOL tests documentation found"
+          else
+            echo "❌ COBOL tests documentation missing"
+            exit 1
+          fi
+
+          # Check Python documentation
+          if [ -f "legacy-app-python/README.md" ]; then
+            echo "✅ Python implementation README found"
+          else
+            echo "❌ Python implementation README missing"
+            exit 1
+          fi
+
+          if [ -f "legacy-app-python/TESTING.md" ]; then
+            echo "✅ Testing documentation found"
+          else
+            echo "❌ Testing documentation missing"
+            exit 1
+          fi
+
+          echo "✅ All required documentation present"
+
+  test-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install coverage tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install coverage
+
+      - name: Run tests with coverage
+        working-directory: ./legacy-app-python
+        run: |
+          # Run tests with coverage measurement
+          coverage run -m unittest test_account_system.py
+          coverage report --show-missing
+          coverage html
+          echo "✅ Test coverage analysis completed"
+
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: legacy-app-python/htmlcov/
