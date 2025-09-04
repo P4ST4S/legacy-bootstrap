@@ -150,7 +150,7 @@ jobs:
             exit 1
           fi
 
-          if [ -f "legacy-app-python/TESTING.md" ]; then
+          if [ -f "docs/TESTING.md" ]; then
             echo "✅ Testing documentation found"
           else
             echo "❌ Testing documentation missing"
