@@ -67,7 +67,7 @@ Successfully modernized a legacy COBOL account management system into a clean, f
 
 Concretely:
 
-- **29 Python tests** (unit + integration) covering data manager, operations, main system, and factory.
+- **32 Python tests** (unit + integration) covering data manager, operations, main system, and factory.
 - **18 COBOL tests** added to validate baseline legacy behavior (menu, operations, persistence) before the Python conversion, establishing a functional reference.
 
 ## Business Logic Preservation
@@ -85,7 +85,7 @@ All original COBOL business logic has been preserved:
 
 ### Validation Results
 
-- **Python tests**: 29/29 passing (100%)
+- **Python tests**: 32/32 passing (100%)
 - **COBOL tests**: 18/18 passing (baseline legacy behavior validated prior to conversion)
 - **Original Test Plan**: All 7 original test cases implemented and passing
 - **Enhanced Testing**: Additional cases for modern error handling and edge cases

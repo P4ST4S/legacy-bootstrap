@@ -87,7 +87,7 @@ legacy-app-python/
 
 ### **Comprehensive Test Coverage**
 
-- **23 automated tests** covering all functionality
+- **32 automated tests** covering all functionality
 - **4 test classes**: DataManager, AccountOperations, AccountManagementSystem, Integration
 - **100% business logic coverage**: All original COBOL test cases implemented
 - **Enhanced testing**: Additional edge cases and error conditions
@@ -102,7 +102,7 @@ legacy-app-python/
 
 ### **Quality Assurance Results**
 
-- ✅ **All 23 tests passing**
+- ✅ **All 32 tests passing**
 - ✅ **98% code coverage**
 - ✅ **All original COBOL functionality verified**
 - ✅ **Enhanced error conditions tested**

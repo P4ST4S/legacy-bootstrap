@@ -89,7 +89,7 @@ This document outlines the comprehensive testing strategy implemented for the mo
 ### Test Run Summary
 
 ```
-Ran 25 tests in 0.123s
+Ran 32 tests in 0.123s
 
 OK
 
@@ -166,7 +166,7 @@ test_debit_account_zero_amount (test_account_system.TestAccountOperations) ... o
 test_view_balance (test_account_system.TestAccountOperations) ... ok
 
 ----------------------------------------------------------------------
-Ran 25 tests in 0.123s
+Ran 32 tests in 0.123s
 
 OK
 ```
