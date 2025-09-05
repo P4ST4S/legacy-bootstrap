@@ -245,8 +245,8 @@ Our CI/CD pipeline automatically validates every code change through comprehensi
 ### Implementation Documentation
 
 - **[Python README](legacy-app-python/README.md)**: Detailed Python implementation guide
-- **[Testing Guide](legacy-app-python/TESTING.md)**: Comprehensive testing documentation
-- **[Coupling Improvements](legacy-app-python/COUPLING_IMPROVEMENTS.md)**: Architecture improvement details
+- **[Testing Guide](docs/TESTING.md)**: Comprehensive testing documentation
+- **[Coupling Improvements](docs/COUPLING_IMPROVEMENTS.md)**: Architecture improvement details
 
 ## 🎯 Project Outcomes
 

@@ -34,6 +34,13 @@ Successfully modernized a legacy COBOL account management system into a clean, f
 - **Modern**: Object-oriented Python with separation of concerns
 - **Benefit**: Better maintainability, testability, and extensibility
 
+#### Coupling and Factory Pattern
+
+- **Legacy coupling**: Direct program calls (tight coupling between `main.cob`, `operations.cob`, and `data.cob`).
+- **Modern coupling**: Interfaces + dependency injection via a `SystemFactory` that builds `DataManager`, `AccountOperations`, and the `AccountManagementSystem`.
+- **Why**: The factory and interfaces invert dependencies, reduce knowledge between modules, and make components replaceable for tests or alternative implementations.
+- **Result**: Significantly lower coupling, easier unit testing (mocking), and simpler future changes without breaking other modules.
+
 ### 2. Data Persistence Enhancement
 
 - **Legacy**: Working storage (session-only)
@@ -58,6 +65,11 @@ Successfully modernized a legacy COBOL account management system into a clean, f
 - **Modern**: Complete unit and integration test suite
 - **Benefit**: Quality assurance, regression prevention, confident refactoring
 
+Concretely:
+
+- **29 Python tests** (unit + integration) covering data manager, operations, main system, and factory.
+- **18 COBOL tests** added to validate baseline legacy behavior (menu, operations, persistence) before the Python conversion, establishing a functional reference.
+
 ## Business Logic Preservation
 
 ### Core Functionality Mapping
@@ -73,9 +85,10 @@ All original COBOL business logic has been preserved:
 
 ### Validation Results
 
-- **Test Coverage**: 23/23 tests passing (100%)
+- **Python tests**: 29/29 passing (100%)
+- **COBOL tests**: 18/18 passing (baseline legacy behavior validated prior to conversion)
 - **Original Test Plan**: All 7 original test cases implemented and passing
-- **Enhanced Testing**: 16 additional test cases for modern functionality
+- **Enhanced Testing**: Additional cases for modern error handling and edge cases
 - **Integration Testing**: Complete workflow validation successful
 
 ## Migration Challenges and Solutions
@@ -117,8 +130,14 @@ All original COBOL business logic has been preserved:
 
 - **Better Error Messages**: Clear, helpful error messages
 - **Input Validation**: Comprehensive input validation with guidance
-- **Visual Improvements**: Enhanced menu formatting and presentation
+- **Visual Improvements**: Enhanced menu formatting and presentation (spacing, alignment, fixed 2-decimal balance display, explicit help/error messages)
 - **Graceful Exit**: Proper handling of interruptions and errors
+
+Rationale for visual changes:
+
+- Improve readability and reduce input mistakes (clearer prompts, explicit error messages).
+- Ensure consistent financial display (Decimal usage, fixed 2-decimal formatting).
+- Preserve legacy options and flow while clarifying user navigation.
 
 ### Maintainability Improvements
 
@@ -126,6 +145,7 @@ All original COBOL business logic has been preserved:
 - **Test Coverage**: Comprehensive automated test suite
 - **Documentation**: Complete technical and user documentation
 - **Modular Architecture**: Easy to extend and modify
+- **Loose Coupling via Factory/Interfaces**: Leverages dependency inversion to allow swapping implementations (e.g., mocks, test data managers) without touching consumers.
 
 ## Performance Analysis
 
