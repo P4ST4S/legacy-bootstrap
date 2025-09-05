@@ -314,6 +314,60 @@ class TestIntegration(unittest.TestCase):
         
         self.assertEqual(balance, Decimal('1300.00'))
 
+    def test_overdraft_then_valid_debit(self):
+        """End-to-end: overdraft should fail, then a valid debit should succeed."""
+        factory = FactoryTestSystemFactory(self.test_file.name)
+        system = factory.create_complete_system()
+        ops = system.operations
+
+        # Starting balance
+        start = ops.get_current_balance()
+
+        # Overdraft attempt
+        self.assertFalse(ops.debit_account(Decimal('50000.00')))
+        self.assertEqual(ops.get_current_balance(), start)
+
+        # Valid debit
+        self.assertTrue(ops.debit_account(Decimal('25.00')))
+        self.assertEqual(ops.get_current_balance(), start - Decimal('25.00'))
+
+    def test_corrupted_data_resets_and_allows_operations(self):
+        """End-to-end: corrupted JSON should reset to default and operations still work."""
+        # Corrupt the file before system creation
+        with open(self.test_file.name, 'w') as f:
+            f.write('{not: valid json')
+
+        factory = FactoryTestSystemFactory(self.test_file.name)
+        system = factory.create_complete_system()
+        ops = system.operations
+
+        # Should reset to default 1000.00
+        self.assertEqual(ops.view_balance(), Decimal('1000.00'))
+
+        # Operations proceed normally
+        self.assertTrue(ops.credit_account(Decimal('10.25')))
+        self.assertEqual(ops.get_current_balance(), Decimal('1010.25'))
+
+    def test_long_transaction_sequence(self):
+        """End-to-end: multiple credits/debits with cents keep precise Decimal math."""
+        factory = FactoryTestSystemFactory(self.test_file.name)
+        system = factory.create_complete_system()
+        ops = system.operations
+
+        # Start from 1000.00
+        self.assertEqual(ops.get_current_balance(), Decimal('1000.00'))
+
+        # Sequence
+        self.assertTrue(ops.credit_account(Decimal('0.10')))
+        self.assertTrue(ops.credit_account(Decimal('0.20')))
+        self.assertTrue(ops.debit_account(Decimal('0.05')))
+        self.assertTrue(ops.credit_account(Decimal('99.75')))
+        self.assertTrue(ops.debit_account(Decimal('50.00')))
+
+        # Final expected balance: 1000.00 + 0.10 + 0.20 - 0.05 + 99.75 - 50.00 = 1049.999999... -> exact Decimal 1049.999999? No, precise adds -> 1049.999999? let's compute
+        expected = Decimal('1000.00') + Decimal('0.10') + Decimal('0.20') - Decimal('0.05') + Decimal('99.75') - Decimal('50.00')
+        self.assertEqual(ops.get_current_balance(), expected)
+
 
 class TestFactoryImplementation(unittest.TestCase):
     """Test cases for SystemFactory and dependency injection."""

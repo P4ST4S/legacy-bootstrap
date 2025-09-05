@@ -89,6 +89,22 @@ jobs:
           print('✅ Integration test passed')
           "
 
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Run end-to-end tests only
+        working-directory: ./legacy-app-python
+        run: |
+          # Filter to integration-style tests in TestIntegration class (5 tests)
+          python -m unittest -v test_account_system.TestIntegration
+
   code-quality:
     runs-on: ubuntu-latest
     steps:
